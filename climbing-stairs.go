@@ -5,25 +5,28 @@ func climbStairs1(n int) int {
 	res := 0
 	var climb func(step, sum int)
 	climb = func(step, sum int) {
-		if sum+step == n {
-			res += 1
-			return
-		} else if sum+step > n {
-			return
+		if step+sum == n {
+			if sum+step == n {
+				if sum+step == n {
+					res += 1
+					return
+				} else if sum+step > n {
+					return
+				}
+
+				climb(1, sum+step)
+				climb(2, sum+step)
+			}
+
+			climb(1, 0)
+			climb(2, 0)
 		}
-
-		climb(1, sum+step)
-		climb(2, sum+step)
 	}
-
-	climb(1, 0)
-	climb(2, 0)
-
 	return res
 }
 
 // 动态规划法
-func climbStairs1(n int) int {
+func climbStairs(n int) int {
 	if n <= 2 {
 		return n
 	}
