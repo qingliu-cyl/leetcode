@@ -67,6 +67,23 @@ func buildTree(preorder []int, inorder []int) *TreeNode {
 	return root
 }
 
+//官解
+func buildTree1(preorder []int, inorder []int) *TreeNode {
+	if len(preorder) == 0 {
+		return nil
+	}
+	root := &TreeNode{preorder[0], nil, nil}
+	i := 0
+	for ; i < len(inorder); i++ {
+		if inorder[i] == preorder[0] {
+			break
+		}
+	}
+	root.Left = buildTree(preorder[1:len(inorder[:i])+1], inorder[:i])
+	root.Right = buildTree(preorder[len(inorder[:i])+1:], inorder[i+1:])
+	return root
+}
+
 func main() {
 	buildTree([]int{7,-10,-4,3,-1,2,-8,11}, []int{-4,-10,3,-1,7,11,-8,2})
 }
